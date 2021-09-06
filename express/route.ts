@@ -24,6 +24,8 @@ import {
         sendLink,
         readMessage,
         messagesDelete,
+        sendImageAsSticker,
+        sendImageAsStickerGif,
         //Status
         sendTextStatus,
         sendImageStatus,
@@ -101,6 +103,24 @@ function routeBuilder(venom:venom.Whatsapp): Router {
         body('base64').customSanitizer(considerAlias('url')).customSanitizer(considerAlias('image')).customSanitizer(considerAlias('file')),
         validationResultReturn(),
         sendImage(venom)
+    ]);
+    venomRoutes.post('/send-image-sticker',[
+        fileUpload({
+            limits: { fileSize: 16 * 1024 * 1024 },
+          }),
+        body('to').customSanitizer(phoneSanitizer('phone')).notEmpty(),
+        body('base64').customSanitizer(considerAlias('url')).customSanitizer(considerAlias('image')).customSanitizer(considerAlias('file')),
+        validationResultReturn(),
+        sendImageAsSticker(venom)
+    ]);
+    venomRoutes.post('/send-image-stickergif',[
+        fileUpload({
+            limits: { fileSize: 16 * 1024 * 1024 },
+          }),
+        body('to').customSanitizer(phoneSanitizer('phone')).notEmpty(),
+        body('base64').customSanitizer(considerAlias('url')).customSanitizer(considerAlias('image')).customSanitizer(considerAlias('file')),
+        validationResultReturn(),
+        sendImageAsStickerGif(venom)
     ]);
     venomRoutes.post('/send-audio',[
         fileUpload({

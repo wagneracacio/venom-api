@@ -61,7 +61,7 @@ function allunreadmessages(venom:venom.Whatsapp){
             }
 
         } catch (error) {
-            res.status(500).send({"error":error.message});
+            res.status(500).send({"error":error});
         }
     }
 }
@@ -82,7 +82,7 @@ function sendText(venom:venom.Whatsapp){
             }
             res.status(200).send(venomReturn);
         } catch(error){
-            res.status(500).send({"error":error.message});
+            res.status(500).send({"error":error});
         }
     }
 }
@@ -104,7 +104,7 @@ function sendTextOptions(venom:venom.Whatsapp){
             }
             res.status(200).send(venomReturn);
         } catch(error){
-            res.status(500).send({"error":error.message});
+            res.status(500).send({"error":error});
         }
     }
 }
@@ -131,7 +131,7 @@ function sendContact(venom:venom.Whatsapp){
             const venomResponse = await venom.sendContactVcard(to,contactsId,name);
             res.status(200).send(venomResponse)
         } catch(error) {
-            res.status(500).send({"error":error.message})
+            res.status(500).send({"error":error})
         }
 
     }
@@ -194,6 +194,35 @@ function sendImage(venom:venom.Whatsapp){
             console.log("filename :",filename);
             console.log("sendImage :",base64.slice(0,30)+'...');
             const venomReturn = await venom.sendImageFromBase64(to, base64, filename, caption);
+            res.status(200).send(venomReturn);
+        } catch(error) {
+            res.status(500).send({"error":error});
+        }
+    }
+}
+
+function sendImageAsSticker(venom:venom.Whatsapp){
+    return async (req:Request, res:Response) => {
+        try{
+            let to = req.body.to;
+            let base64:string = req.body.base64;
+
+            console.log("sendImage :",base64.slice(0,30)+'...');
+            const venomReturn = await venom.sendImageAsSticker(to, base64);
+            res.status(200).send(venomReturn);
+        } catch(error) {
+            res.status(500).send({"error":error});
+        }
+    }
+}
+function sendImageAsStickerGif(venom:venom.Whatsapp){
+    return async (req:Request, res:Response) => {
+        try{
+            let to = req.body.to;
+            let base64:string = req.body.base64;
+
+            console.log("sendImage :",base64.slice(0,30)+'...');
+            const venomReturn = await venom.sendImageAsStickerGif(to, base64);
             res.status(200).send(venomReturn);
         } catch(error) {
             res.status(500).send({"error":error});
@@ -385,7 +414,7 @@ function sendLink(venom:venom.Whatsapp){
             const venomReturn = await venom.sendLinkPreview(chatId, url, title);
             res.status(200).send(venomReturn);
         } catch(error){
-            res.status(500).send({"error":error.message});
+            res.status(500).send({"error":error});
         }
     }
 }
@@ -420,7 +449,7 @@ function messagesDelete(venom:venom.Whatsapp){
 
     }
 }
-
+//working???
 function sendTextStatus(venom:venom.Whatsapp){
     return async (req:Request, res:Response) => {
         try{
@@ -624,7 +653,8 @@ export {
     sendLink,
     readMessage,
     messagesDelete,
-
+    sendImageAsSticker,
+    sendImageAsStickerGif,
     //Status
     sendTextStatus,
     sendImageStatus,
