@@ -1,4 +1,4 @@
-import config from '../config/default.json';
+import config from '../../config/default.json';
 
 export default function(phone:string):string {
     if (!phone.includes("@")){

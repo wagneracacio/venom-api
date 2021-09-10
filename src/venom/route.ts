@@ -1,4 +1,4 @@
-import venom from 'venom-bot'
+import wppconnect from '@wppconnect-team/wppconnect'
 import { catchQR_controller,
          statusFind_controller,
          ack,
@@ -21,7 +21,7 @@ function statusFind(statusGet: string, session: string):void{
     statusFind_controller(statusGet,session);
 }
 
-function start(client:venom.Whatsapp):void{
+function start(client:wppconnect.Whatsapp):void{
     client.onAck(ack);
     client.onAddedToGroup(addedToGroup);
     client.onAnyMessage(anyMessage);

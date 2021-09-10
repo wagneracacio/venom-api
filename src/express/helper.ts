@@ -1,8 +1,8 @@
 import ogs from 'open-graph-scraper';
-import config from '../config/default.json';
+import config from '../../config/default.json';
 import { Request, Response, NextFunction } from 'express';
 import { CustomSanitizer, Meta, validationResult } from 'express-validator';
-import { Whatsapp, Message, PartialMessage } from 'venom-bot';
+import { Whatsapp, Message, PartialMessage } from '@wppconnect-team/wppconnect';
 import { message } from '../venom/contoller';
 
 
@@ -28,7 +28,7 @@ export function base64MimeType(encoded: string) {
 
 export function addVenomOnRequest(client:Whatsapp){
   return (req:Request, _res:Response, next:NextFunction) => {
-    req.venom = client;
+    req.wpconnect = client;
     next()
   }  
 }

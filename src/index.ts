@@ -1,10 +1,10 @@
-import config from './config/default.json';
+import config from '../config/default.json';
 import express from 'express';
-import { create } from 'venom-bot';
+import { create } from '@wppconnect-team/wppconnect';
 import { catchQR, statusFind, start } from './venom/route';
 import { routeBuilder } from './express/route';
-import { defaultOptions, CreateConfig } from 'venom-bot/dist/config/create-config';
-import { puppeteerConfig } from 'venom-bot/dist/config/puppeteer.config';
+import { defaultOptions, CreateConfig } from '@wppconnect-team/wppconnect/dist/config/create-config';
+import { puppeteerConfig } from '@wppconnect-team/wppconnect/dist/config/puppeteer.config';
 
 const app = express();
 const PORT = config.api.port;
