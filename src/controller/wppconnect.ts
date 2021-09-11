@@ -61,7 +61,7 @@ export default class WppConnect {
     useHere(){
         return async (req:Request, res:Response) => {
             try {
-                console.log("Use Here Action")
+                console.log("Use Here Action");
                 const wppconnectReturn = await this.connection.useHere();
                 res.status(200).send(wppconnectReturn);
             } catch (error) {
@@ -72,7 +72,7 @@ export default class WppConnect {
     qrCode(){
         return async (req:Request, res:Response) => {
             try{
-                console.log("qrCode")
+                console.log("qrCode");
                 const wppconnectReturn = await this.connection.getQrCode();
                 res.status(200).send(wppconnectReturn);
             } catch(error) {
@@ -83,7 +83,7 @@ export default class WppConnect {
     qrCodeImage(){
         return async (req:Request, res:Response) => {
             try{
-                console.log("qrCode")
+                console.log("qrCode");
                 const wppconnectReturn = await this.connection.getQrCode();
                 res.status(200).send(`<img src='${wppconnectReturn.base64Image}'>`);
             } catch(error) {
@@ -94,8 +94,8 @@ export default class WppConnect {
     allunreadmessages(){
         return async (req:Request, res:Response) => {
             try{
-                console.log("AllUnreadMessages")
-                const resend = req.query.resend
+                console.log("AllUnreadMessages");
+                const resend = req.query.resend;
                 const wppconnectReturn = await this.connection.getAllUnreadMessages()
                 console.log(wppconnectReturn)
                 if(!!resend){
@@ -111,7 +111,15 @@ export default class WppConnect {
         }
     }
     restart(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                console.log("Restart Service Action");
+                const wppconnectReturn = await this.connection.restartService();
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     disconnect(){
@@ -119,7 +127,15 @@ export default class WppConnect {
     }
     
     status(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                console.log("Restart Service Action");
+                const wppconnectReturn = await this.connection.getConnectionState();
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     restoreSession(){
@@ -481,9 +497,20 @@ export default class WppConnect {
         return async (req:Request, res:Response) => {}
     } 
     
-    //Grupo
+    //Grupo not working!?
     createGroup(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try{
+                const groupName = req.body.name;
+                const contacts = req.body.constacts;
+                console.log("chatsPhone")
+                const wppconnectReturn = await this.connection.createGroup(groupName, contacts);
+                res.status(200).send(wppconnectReturn);
+            } catch(error) {
+                res.status(500).send({"error":error});
+            }
+            
+        }
     }
         
     updateGroupName(){
