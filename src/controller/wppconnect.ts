@@ -58,6 +58,17 @@ export default class WppConnect {
 
         return { to, base64, filename, caption, mimetype}
     }
+    useHere(){
+        return async (req:Request, res:Response) => {
+            try {
+                console.log("Use Here Action")
+                const wppconnectReturn = await this.connection.useHere();
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
+    }
     qrCode(){
         return async (req:Request, res:Response) => {
             try{
