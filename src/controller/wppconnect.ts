@@ -512,7 +512,16 @@ export default class WppConnect {
             
         }
     }
-        
+    allgroups(){
+        return async (req:Request, res:Response) => {
+            try {
+                const wppconnectReturn = await this.connection.getAllGroups(false);
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
+    }
     updateGroupName(){
         return async (req:Request, res:Response) => {}
     }

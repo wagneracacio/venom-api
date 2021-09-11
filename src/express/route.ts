@@ -156,6 +156,7 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
     wppconnectRoutes.get('​/profile-picture', connection.profilePicture());
     wppconnectRoutes.get('​/phone-exists/:phone', connection.phoneExists());
     //Grupo
+    wppconnectRoutes.get('/all-groups', connection.allgroups());
     wppconnectRoutes.post('​/create-group', connection.createGroup());
     wppconnectRoutes.post('​/update-group-name', connection.updateGroupName());
     wppconnectRoutes.post('​/add-admin', connection.addAdmin());
