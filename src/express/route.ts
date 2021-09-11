@@ -11,6 +11,7 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
 
     //https://api.z-api.io/instances/MINHA_INSTANCE/token/MEU_TOKEN
     //Instância
+    wppconnectRoutes.get('/test', connection.status());
     wppconnectRoutes.get('/use-here', connection.useHere());
     wppconnectRoutes.get('/qr-code', connection.qrCode());
     wppconnectRoutes.get('/qr-code/image', connection.qrCodeImage());
