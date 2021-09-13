@@ -466,8 +466,8 @@ export default class WppConnect {
     chatsPhone(){
         return async (req:Request, res:Response) => {
             try{
-                console.log("chatsPhone")
-                const { 'phone': contactId } = matchedData(req)
+                console.log("chatsPhone");
+                const { 'phone': contactId } = matchedData(req);
                 const wppconnectReturn = await this.connection.getChatById(contactId);
                 res.status(200).send(wppconnectReturn);
             } catch(error) {
@@ -482,7 +482,15 @@ export default class WppConnect {
     
     //Contatos
     contacts(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                console.log("");
+                const wppconnectReturn = await this.connection.getAllContacts();
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     contactsPhone(){
@@ -502,7 +510,7 @@ export default class WppConnect {
         return async (req:Request, res:Response) => {
             try{
                 const groupName = req.body.name;
-                const contacts = req.body.constacts;
+                const contacts = req.body.contacts;
                 console.log("chatsPhone")
                 const wppconnectReturn = await this.connection.createGroup(groupName, contacts);
                 res.status(200).send(wppconnectReturn);
@@ -523,7 +531,16 @@ export default class WppConnect {
         }
     }
     updateGroupName(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                const groupid = req.body.groupid;
+                const title = req.body.title;
+                const wppconnectReturn = await this.connection.setGroupSubject(groupid, title);
+                res.status(200).send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     addAdmin(){

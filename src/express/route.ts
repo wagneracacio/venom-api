@@ -11,7 +11,7 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
 
     //https://api.z-api.io/instances/MINHA_INSTANCE/token/MEU_TOKEN
     //Instância
-    wppconnectRoutes.get('/test', connection.status());
+    wppconnectRoutes.post('/test', connection.status());
     wppconnectRoutes.get('/use-here', connection.useHere());
     wppconnectRoutes.get('/qr-code', connection.qrCode());
     wppconnectRoutes.get('/qr-code/image', connection.qrCodeImage());
@@ -156,9 +156,13 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
     wppconnectRoutes.get('​/profile-picture', connection.profilePicture());
     wppconnectRoutes.get('​/phone-exists/:phone', connection.phoneExists());
     //Grupo
+    wppconnectRoutes.post('/create-group', connection.createGroup());
     wppconnectRoutes.get('/all-groups', connection.allgroups());
-    wppconnectRoutes.post('​/create-group', connection.createGroup());
-    wppconnectRoutes.post('​/update-group-name', connection.updateGroupName());
+    wppconnectRoutes.post('/change-group-name', [
+        param('groupid').notEmpty(),
+        param('title').notEmpty(),
+        connection.updateGroupName()
+    ]);
     wppconnectRoutes.post('​/add-admin', connection.addAdmin());
     wppconnectRoutes.post('​/remove-admin', connection.removeAdmin());
     wppconnectRoutes.post('​/add-participant', connection.addParticipant());
