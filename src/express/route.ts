@@ -168,7 +168,11 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
         param('participant').notEmpty(),
         connection.addAdmin()
     ]);
-    wppconnectRoutes.post('​/remove-admin', connection.removeAdmin());
+    wppconnectRoutes.post('/demote-admin',[
+        param('groupid').notEmpty(),
+        param('participant').notEmpty(),
+        connection.removeAdmin()
+    ]);
     wppconnectRoutes.post('/add-group',[
         param('groupid').notEmpty(),
         param('participant').notEmpty(),

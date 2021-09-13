@@ -557,7 +557,16 @@ export default class WppConnect {
     }
     
     removeAdmin(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                const groupid = req.body.groupid;
+                const participantid = req.body.participant;
+                const wppconnectReturn = await this.connection.demoteParticipant(groupid, participantid)
+                res.status(200). send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     addParticipant(){
