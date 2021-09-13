@@ -552,7 +552,16 @@ export default class WppConnect {
     }
     
     addParticipant(){
-        return async (req:Request, res:Response) => {}
+        return async (req:Request, res:Response) => {
+            try {
+                const groupid = req.body.groupid;
+                const participantid = req.body.participant;
+                const wppconnectReturn = await this.connection.addParticipant(groupid,participantid);
+                res.status(200). send(wppconnectReturn);
+            } catch (error) {
+                res.status(500).send({"error":error});
+            }
+        }
     }
     
     removeParticipant(){

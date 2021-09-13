@@ -165,7 +165,11 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
     ]);
     wppconnectRoutes.post('​/add-admin', connection.addAdmin());
     wppconnectRoutes.post('​/remove-admin', connection.removeAdmin());
-    wppconnectRoutes.post('​/add-participant', connection.addParticipant());
+    wppconnectRoutes.post('/add-group',[
+        param('groupid').notEmpty(),
+        param('participant').notEmpty(),
+        connection.addParticipant()
+    ]);
     wppconnectRoutes.post('​/remove-participant', connection.removeParticipant());
     wppconnectRoutes.post('​/leave-group', connection.leaveGroup());
     wppconnectRoutes.get('​​/group-metadata​/{phone}', connection.groupMetadataPhone());
