@@ -163,7 +163,11 @@ function routeBuilder(wppconnect:wppconnect.Whatsapp): Router {
         param('title').notEmpty(),
         connection.updateGroupName()
     ]);
-    wppconnectRoutes.post('​/add-admin', connection.addAdmin());
+    wppconnectRoutes.post('/promote-admin',[
+        param('groupid').notEmpty(),
+        param('participant').notEmpty(),
+        connection.addAdmin()
+    ]);
     wppconnectRoutes.post('​/remove-admin', connection.removeAdmin());
     wppconnectRoutes.post('/add-group',[
         param('groupid').notEmpty(),
